@@ -9,6 +9,10 @@
 </head>
 
 <body>
+    test
+    <?php
+    include_once 'db.php';
+    ?>
 
 </body>
 

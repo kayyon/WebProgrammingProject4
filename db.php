@@ -1,3 +1,4 @@
+<!-- database initialized using UNIX socket on MAMP -->
 <?php
 $db_host = 'localhost';
 $db_user = 'root';
@@ -16,12 +17,19 @@ if ($mysqli->connect_error) {
     echo '<br>';
     echo 'Error: ' . $mysqli->connect_error;
     exit();
+} else {
+    echo 'Success: A proper connection to MySQL was made.';
+    echo '<br>';
+    echo 'Host information: ' . $mysqli->host_info;
+    echo '<br>';
+    echo 'Protocol version: ' . $mysqli->protocol_version;
 }
 
-echo 'Success: A proper connection to MySQL was made.';
-echo '<br>';
-echo 'Host information: ' . $mysqli->host_info;
-echo '<br>';
-echo 'Protocol version: ' . $mysqli->protocol_version;
+// $sql = "CREATE DATABASE property";
+// if ($conn->query($db_db) === TRUE) {
+//     echo "Database created successfully";
+// } else {
+//     echo "Error creating database: " . $conn->error;
+// }
 
 $mysqli->close();
