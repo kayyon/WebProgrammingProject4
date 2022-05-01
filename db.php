@@ -5,7 +5,7 @@ $db_user = 'root';
 $db_password = 'root';
 $db_db = 'property';
 
-$mysqli = @new mysqli(
+$mysqli = new mysqli(
     $db_host,
     $db_user,
     $db_password,
@@ -31,5 +31,3 @@ if ($mysqli->connect_error) {
 // } else {
 //     echo "Error creating database: " . $conn->error;
 // }
-
-$mysqli->close();
