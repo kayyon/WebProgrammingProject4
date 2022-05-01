@@ -1,0 +1,58 @@
+#propForm{
+	display: none;
+}
+
+body{
+	background-color: lightgray;
+}
+
+input{
+	background-color: aliceblue;
+	display: block;
+	outline: none;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	height: 20px;
+
+}
+
+fieldset{
+	border: 1px solid;
+	border-radius: 15px;
+	width: 20%;
+}
+.text{
+	background-color: cornsilk;
+	font-family: 'Times New Roman', Times, serif;
+	font-weight: normal;
+}
+.MenuInfo {
+  position:absolute
+  display: inline
+}
+
+.Menu-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  z-index: 1;
+}
+
+.Menu-content a {
+  color:darkred;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.Menu-content a:hover {background-color: #f1f1f1}
+
+.MenuInfo:hover .Menu-content {
+  display: block;
+}
+
+.MenuInfo:hover .MenuInfo {
+  background-color: #3e8e41;
+}
+
