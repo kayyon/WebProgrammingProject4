@@ -30,13 +30,22 @@
         if ($password === $confirm_password) {
             $sql_query = "INSERT INTO user (first_name, last_name, username, email, password) VALUES ('$first_name', '$last_name', '$username', '$email', '$password');";
             if (mysqli_query($mysqli, $sql_query)) {
-                echo "New record created successfully";
+                echo "New account created successfully";
             } else {
                 echo "Error: " . $sql_query . "<br>" . mysqli_error($mysqli);
             }
         } else {
             echo "Your password does not match";
         }
+
+        $_SESSION['username'] = $username;
+        $_SESSION['email'] = $email;
+        $_SESSION['first_name'] = $first_name;
+        $_SESSION['last_name'] = $last_name;
+        $_SESSION['register_message'] = "Account successfully created";
+
+        header("Location: login.php");
+        exit();
     }
     $mysqli->close();
     ?>

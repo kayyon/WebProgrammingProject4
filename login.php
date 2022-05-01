@@ -1,6 +1,6 @@
-<!-- load session variables -->
+<!-- destroy session variables -->
 <?php
-session_destroy();
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,24 +15,36 @@ session_destroy();
 <body>
     <!-- include db for connection -->
     <?php
-    include_once 'db.php';
+    include 'db.php';
     ?>
 
     <!-- WORK IN PROGRESS -->
     <?php
-    // if (isset($_POST['submit'])) {
-    //     $first_name = $_POST['first_name'];
-    //     $last_name = $_POST['last_name'];
-    //     $username = $_POST['username'];
-    //     $email = $_POST['email'];
-    //     $password = $_POST['password'];
-    //     $confirm_password = $_POST['confirm_password'];
-    // }
+    if (isset($_SESSION['username'])) {
+        echo $_SESSION['register_message'];
+    }
 
-    // $sql_query = "INSERT INTO user (first_name, last_name, username, email, password) VALUES ('$first_name', '$last_name', '$username', '$email', '$password');";
+    if (isset($_POST['submit'])) {
+        $_SESSION['username'] = $_POST['username'];
+        header("Location: index.php");
+        exit();
+    }
 
-    // if (mysqli_query($)
+    $mysqli->close();
     ?>
+
+    <form action="index.php" method="POST" onsubmit="return validate()">
+        <p>
+            <label for="username">Username</label>
+            <input type="text" name="username">
+        </p>
+
+        <p>
+            <label for="password">Password</label>
+            <input type="password" name="password">
+        </p>
+        <input type="submit" name="submit" value="Login" />
+    </form>
 </body>
 
 </html>
