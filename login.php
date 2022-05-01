@@ -18,19 +18,20 @@ session_destroy();
     include_once 'db.php';
     ?>
 
+    <!-- WORK IN PROGRESS -->
     <?php
-    if (isset($_POST['submit'])) {
-        $first_name = $_POST['first_name'];
-        $last_name = $_POST['last_name'];
-        $username = $_POST['username'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $confirm_password = $_POST['confirm_password'];
-    }
+    // if (isset($_POST['submit'])) {
+    //     $first_name = $_POST['first_name'];
+    //     $last_name = $_POST['last_name'];
+    //     $username = $_POST['username'];
+    //     $email = $_POST['email'];
+    //     $password = $_POST['password'];
+    //     $confirm_password = $_POST['confirm_password'];
+    // }
 
-    $sql_query = "INSERT INTO user (first_name, last_name, username, email, password) VALUES ('$first_name', '$last_name', '$username', '$email', '$password');";
+    // $sql_query = "INSERT INTO user (first_name, last_name, username, email, password) VALUES ('$first_name', '$last_name', '$username', '$email', '$password');";
 
-    if (mysqli_query($)
+    // if (mysqli_query($)
     ?>
 </body>
 
