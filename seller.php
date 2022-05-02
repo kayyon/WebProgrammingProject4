@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <?php
 session_start();
-if (empty($_SESSION['logged_in'])) {
+if (empty($_SESSION['seller'])) {
     header('Location: login.php');
     exit;
+}
+if ($_SESSION["username"]) {
+    echo "Welcome " . $_SESSION["username"];
 }
 ?>
 <html lang="en">
@@ -19,7 +22,7 @@ if (empty($_SESSION['logged_in'])) {
 <body>
 
     <div id="propForm">
-        <form action="sellers.php" method="POST" enctype="multipart/form-data">
+        <form action="seller.php" method="POST" enctype="multipart/form-data">
 
             <p>
                 <label for="imageUpload">Upload Image:</label>
@@ -98,13 +101,14 @@ if (empty($_SESSION['logged_in'])) {
         $parkingAvailability = $_POST['parkingAvailability'];
         $nearbyFacilities = $_POST['nearbyFacilities'];
         $mainRoads = $_POST['mainRoads'];
+        $user_id = $_SESSION['user_id'];
         $propertyTax = (7 / 100) * $propertyValue;
-        $sql_query = "INSERT INTO properties (propertyValue, location, age, bedroomNum, bathroomNum, garden, parkingAvailability, nearbyFacilities, mainRoads, propertyTax, image) 
-		VALUES('$propertyValue', '$location', '$age', '$bedroomNum', '$bathroomNum', '$garden', '$parkingAvailability', '$nearbyFacilities', '$mainRoads', '$propertyTax', '$image')";
+        $sql_query = "INSERT INTO properties (propertyValue, location, age, bedroomNum, bathroomNum, garden, parkingAvailability, nearbyFacilities, mainRoads, propertyTax, image, user_id) 
+		VALUES('$propertyValue', '$location', '$age', '$bedroomNum', '$bathroomNum', '$garden', '$parkingAvailability', '$nearbyFacilities', '$mainRoads', '$propertyTax', '$image', '$user_id')";
         mysqli_query($mysqli, $sql_query) or die(mysqli_error($mysqli));
     }
 
-    $sql_query = "SELECT id, propertyValue, location, age, bedroomNum, bathroomNum, garden, parkingAvailability, nearbyFacilities, mainRoads, propertyTax, image FROM properties";
+    $sql_query = "SELECT * FROM properties WHERE user_id = " . $_SESSION["user_id"];
     $result = $mysqli->query($sql_query);
 
     echo "<h3>Properties</h3>";

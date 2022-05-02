@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <?php
 session_start();
-if (empty($_SESSION['logged_in'])) {
+if (empty($_SESSION['buyer'])) {
     header('Location: login.php');
     exit;
+}
+if ($_SESSION["username"]) {
+    echo "Welcome " . $_SESSION["username"];
 }
 ?>
 <html lang="en">
@@ -20,7 +23,7 @@ if (empty($_SESSION['logged_in'])) {
     <?php
     include 'db.php';
 
-    $sql_query = "SELECT id, propertyValue, location, age, bedroomNum, bathroomNum, garden, parkingAvailability, nearbyFacilities, mainRoads, propertyTax FROM properties";
+    $sql_query = "SELECT * FROM properties";
     $result = $mysqli->query($sql_query);
 
     echo "<h3>Properties</h3>";

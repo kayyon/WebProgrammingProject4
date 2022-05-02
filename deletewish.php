@@ -16,10 +16,10 @@ session_start();
     <?php
     include 'db.php';
     $id = $_POST['id'];
-    $sql_query = "DELETE FROM properties WHERE id = $id";
-    mysqli_query($mysqli, $sql_query) or die(mysqli_error($conn));
+    $sql_query = "DELETE FROM wishlist WHERE user_id = " . $_SESSION["user_id"] . " AND id =" . $id;
+    mysqli_query($mysqli, $sql_query) or die(mysqli_error($mysqli));
     $mysqli->close();
-    header("Location: seller.php");
+    header("Location: buyer.php");
     ?>
 </body>
 

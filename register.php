@@ -26,6 +26,11 @@ session_start();
         $confirm_password = $_POST['confirm_password'];
         $buyerSeller = $_POST['buyerSeller'];
 
+        if ($username === "admin") {
+            echo "You cannot register this username, reload the page and try again";
+            $mysqli->close();
+        }
+
         if ($password === $confirm_password) {
             $hashPassword = password_hash($password, PASSWORD_DEFAULT);
             $sql_query = "INSERT INTO user (first_name, last_name, username, email, password, buyerSeller) VALUES ('$first_name', '$last_name', '$username', '$email', '$hashPassword', '$buyerSeller');";
@@ -34,6 +39,9 @@ session_start();
             if (!$valid) {
                 echo "Error: " . mysqli_error($mysqli);
             } else {
+                // session variables for sign up success window
+                $_SESSION['register_username'] = $username;
+                $_SESSION['register_message'] = "Account successfully created";
                 // redirects to login
                 header("Location: login.php");
                 exit();
@@ -41,10 +49,6 @@ session_start();
         } else {
             echo "Your password does not match";
         }
-
-        // session variables for sign up success window
-        $_SESSION['register_username'] = $username;
-        $_SESSION['register_message'] = "Account successfully created";
     }
     $mysqli->close();
     ?>
