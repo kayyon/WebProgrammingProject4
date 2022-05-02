@@ -23,6 +23,7 @@ if (empty($_SESSION['seller'])) {
     <form action="home.php">
         <input type="submit" name="home" value="Home" />
     </form>
+
     <div id="propForm">
         <form action="seller.php" method="POST" enctype="multipart/form-data">
 
@@ -132,6 +133,7 @@ if (empty($_SESSION['seller'])) {
             echo "<form action=\"details.php\" method = \"POST\">";
             echo "<input type=\"hidden\" name=\"id\" value = \"" . $row["id"] . "\">";
             echo "<input type=\"submit\" value=\"View Property\">";
+            echo "</form>";
             echo "</div>";
         }
     } else {

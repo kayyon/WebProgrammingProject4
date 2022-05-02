@@ -19,12 +19,12 @@ if (empty($_SESSION['admin'])) {
 </head>
 
 <body>
-    <!-- WORK IN PROGRESS -->
-    <!-- TODO: buyer table, seller table, properties table -->
-    <!-- TODO: delete user, delete properties -->
-
     <form action="home.php">
         <input type="submit" name="home" value="Home" />
+    </form>
+
+    <form action="search.php">
+        <input type="submit" name="search" value="Search" />
     </form>
 
     <?php
@@ -52,11 +52,36 @@ if (empty($_SESSION['admin'])) {
             echo "<form action=\"details.php\" method = \"POST\">";
             echo "<input type=\"hidden\" name=\"id\" value = \"" . $row["id"] . "\">";
             echo "<input type=\"submit\" value=\"View Property\">";
+            echo "</form>";
             echo "</div>";
         }
     } else {
         echo "0 results";
     }
+
+    $sql_user = "SELECT * FROM user;";
+    $result_user = $mysqli->query($sql_user);
+
+    echo "<h3>Users</h3>";
+    if ($result_user->num_rows > 0) {
+
+        while ($row = mysqli_fetch_assoc($result_user)) {
+            echo "<div>";
+            echo "first_name: " . $row["first_name"] . "<br/>";
+            echo "last_name: " . $row["last_name"] . "<br/>";
+            echo "username: " . $row["username"] . "<br/>";
+            echo "email: " . $row["email"] . "<br/>";
+            echo "buyerSeller: " . $row["buyerSeller"] . "<br/>";
+            echo "<form action=\"deleteuser.php\" method = \"POST\">";
+            echo "<input type=\"hidden\" name=\"user_id\" value = \"" . $row["user_id"] . "\">";
+            echo "<input type=\"submit\" value=\"Delete User\">";
+            echo "</form>";
+            echo "</div>";
+        }
+    } else {
+        echo "0 results";
+    }
+
     ?>
 </body>
 

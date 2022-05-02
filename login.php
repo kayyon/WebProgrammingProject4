@@ -50,6 +50,7 @@ session_start();
             if ($retrieved_data["buyerSeller"] == 0) {
                 $_SESSION['buyer'] = "buyer";
                 $_SESSION['details'] = "details";
+                $_SESSION["search"] = "search";
                 header("Location: buyer.php");
                 exit();
             } else {
@@ -69,6 +70,7 @@ session_start();
                 $_SESSION['admin'] = "yes";
                 $_SESSION['details'] = "details";
                 $_SESSION['delete'] = "delete";
+                $_SESSION["search"] = "search";
                 header("Location: admin.php");
                 exit();
             } else {

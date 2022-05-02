@@ -24,6 +24,10 @@ if (empty($_SESSION['buyer'])) {
         <input type="submit" name="home" value="Home" />
     </form>
 
+    <form action="search.php">
+        <input type="submit" name="search" value="Search" />
+    </form>
+
     <?php
     include 'db.php';
 
@@ -48,6 +52,7 @@ if (empty($_SESSION['buyer'])) {
             echo "<form action=\"buydetails.php\" method = \"POST\">";
             echo "<input type=\"hidden\" name=\"id\" value = \"" . $row["id"] . "\">";
             echo "<input type=\"submit\" value=\"View Property\">";
+            echo "</form>";
             echo "</div></p>";
         }
     } else {
