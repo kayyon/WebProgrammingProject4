@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <?php
 session_start();
+if (empty($_SESSION['delete'])) {
+    session_destroy();
+    header("Location: login.php");
+    exit();
+}
 ?>
 <html lang="en">
 
@@ -19,7 +24,13 @@ session_start();
     $sql_query = "DELETE FROM properties WHERE id = $id";
     mysqli_query($mysqli, $sql_query) or die(mysqli_error($conn));
     $mysqli->close();
-    header("Location: seller.php");
+    if ($_SESSION['admin']) {
+        header("Location: admin.php");
+        exit();
+    } else {
+        header("Location: seller.php");
+        exit();
+    }
     ?>
 </body>
 

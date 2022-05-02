@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <?php
 session_start();
-if (empty($_SESSION['logged_in'])) {
+if (empty($_SESSION['details'])) {
+    session_destroy();
     header('Location: login.php');
     exit;
 }
@@ -17,7 +18,9 @@ if (empty($_SESSION['logged_in'])) {
 </head>
 
 <body>
-
+    <form action="home.php">
+        <input type="submit" name="home" value="Home" />
+    </form>
     <?php
     include 'db.php';
 
@@ -103,7 +106,7 @@ if (empty($_SESSION['logged_in'])) {
 
     <form action="delete.php" method="POST">
         <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
-        <input type="submit" value="Delete Property Details">
+        <input type="submit" <?php if ($result->num_rows == 0) { ?> disabled="disabled" <?php } ?> value="Delete Property Details">
     </form>
 
     <button id="btn">Edit Property Details</button>
