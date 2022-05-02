@@ -33,6 +33,7 @@ if ($mysqli->connect_error) {
     echo 'Protocol version: ' . $mysqli->protocol_version;
 }
 
+
 // properties table
 // $sql_properties = "CREATE TABLE IF NOT EXISTS properties (
 //     id MEDIUMINT NOT NULL AUTO_INCREMENT,
@@ -45,18 +46,21 @@ if ($mysqli->connect_error) {
 //     parkingAvailability tinyint(1) NOT NULL,
 //     nearbyFacilities tinyint(1) NOT NULL,
 //     mainRoads tinyint(1) NOT NULL,
-//     propertyTax int(20) NOT NULL,    
+//     propertyTax int(20) NOT NULL,
+//     image VARCHAR(50) NOT NULL,
+//     user_id int(11) NOT NULL,
 //     PRIMARY KEY (id))";
 
 // if (mysqli_query($mysqli, $sql_properties)) {
 //     echo "Table properties created successfully";
 // } else {
-//     echo "Error creating table: " . mysqli_error($mysqli);
+//     echo "Error creating properties table: " . mysqli_error($mysqli);
 // }
 
 
+// // wishlist table
 // $sql_wishlist = "CREATE TABLE IF NOT EXISTS wishlist (
-//     id MEDIUMINT NOT NULL AUTO_INCREMENT,
+//     id MEDIUMINT NOT NULL,
 //     propertyValue int(20) NOT NULL,
 //     location VARCHAR(50) NOT NULL,
 //     age int(5) NOT NULL,
@@ -66,13 +70,15 @@ if ($mysqli->connect_error) {
 //     parkingAvailability tinyint(1) NOT NULL,
 //     nearbyFacilities tinyint(1) NOT NULL,
 //     mainRoads tinyint(1) NOT NULL,
-//     propertyTax int(20) NOT NULL,    
+//     propertyTax int(20) NOT NULL,
+//     image VARCHAR(50) NOT NULL,
+//     user_id int(11) NOT NULL,
 //     PRIMARY KEY (id))";
 
-// if (mysqli_query($mysqli, $sql_properties)) {
+// if (mysqli_query($mysqli, $sql_wishlist)) {
 //     echo "Table properties created successfully";
 // } else {
-//     echo "Error creating table: " . mysqli_error($mysqli);
+//     echo "Error creating wishlist table: " . mysqli_error($mysqli);
 // }
 
 

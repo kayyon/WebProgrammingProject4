@@ -110,6 +110,7 @@ if (empty($_SESSION['logged_in'])) {
     <script src="index.js"></script>
 
     <?php
+    include 'db.php';
     if (isset($_POST['submit'])) {
         $propertyValue = $_POST['propertyValue'];
         $location = $_POST['location'];
@@ -123,17 +124,17 @@ if (empty($_SESSION['logged_in'])) {
         $propertyTax = (7 / 100) * $propertyValue;
 
         $sql_query = "UPDATE properties SET 
-	propertyValue =" . $propertyValue . ", 
-	location =" . $location . ", 
-	age=" . $age . ", 
-	bedroomNum =" . $bedroomNum . ", 
-	bathroomNum =" . $bathroomNum . ", 
-	garden =" . $garden . ", 
-	parkingAvailability =" . $parkingAvailability . ", 
-	nearbyFacilities =" . $nearbyFacilities . ", 
-	mainRoads=" . $mainRoads . ",
-	propertyTax=" . $propertyTax . "
-	WHERE id=" . $id;
+        propertyValue =" . $propertyValue . ", 
+        location =" . $location . ", 
+        age=" . $age . ", 
+        bedroomNum =" . $bedroomNum . ", 
+        bathroomNum =" . $bathroomNum . ", 
+        garden =" . $garden . ", 
+        parkingAvailability =" . $parkingAvailability . ", 
+        nearbyFacilities =" . $nearbyFacilities . ", 
+        mainRoads=" . $mainRoads . ",
+        propertyTax=" . $propertyTax . "
+        WHERE id=" . $id;
         mysqli_query($mysqli, $sql_query) or die(mysqli_error($mysqli));
     }
 
