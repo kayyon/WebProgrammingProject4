@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <?php
 session_start();
+if (empty($_SESSION['buyer'])) {
+    session_destroy();
+    header("Location: login.php");
+    exit();
+}
 ?>
 <html lang="en">
 
@@ -13,7 +18,9 @@ session_start();
 </head>
 
 <body>
-
+    <form action="home.php">
+        <input type="submit" name="home" value="Home" />
+    </form>
     <?php
     include 'db.php';
 

@@ -12,6 +12,9 @@ session_start();
 </head>
 
 <body>
+    <form action="home.php">
+        <input type="submit" name="home" value="Home" />
+    </form>
     <!-- include db for connection -->
     <?php
     include 'db.php';
@@ -46,10 +49,13 @@ session_start();
             // checks if user is buyer or seller and redirects user to proper dashboard
             if ($retrieved_data["buyerSeller"] == 0) {
                 $_SESSION['buyer'] = "buyer";
+                $_SESSION['details'] = "details";
                 header("Location: buyer.php");
                 exit();
             } else {
                 $_SESSION['seller'] = "seller";
+                $_SESSION['details'] = "details";
+                $_SESSION['delete'] = "delete";
                 header("Location: seller.php");
                 exit();
             }
@@ -60,7 +66,9 @@ session_start();
             $retrieved_admin = mysqli_fetch_assoc($sql_admin_query);
 
             if ($retrieved_admin["adminPassword"] == $password) {
-                $_SESSION['logged_in'] = "yes";
+                $_SESSION['admin'] = "yes";
+                $_SESSION['details'] = "details";
+                $_SESSION['delete'] = "delete";
                 header("Location: admin.php");
                 exit();
             } else {

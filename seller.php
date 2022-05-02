@@ -2,10 +2,10 @@
 <?php
 session_start();
 if (empty($_SESSION['seller'])) {
+    session_destroy();
     header('Location: login.php');
     exit;
-}
-if ($_SESSION["username"]) {
+} else {
     echo "Welcome " . $_SESSION["username"];
 }
 ?>
@@ -20,7 +20,9 @@ if ($_SESSION["username"]) {
 </head>
 
 <body>
-
+    <form action="home.php">
+        <input type="submit" name="home" value="Home" />
+    </form>
     <div id="propForm">
         <form action="seller.php" method="POST" enctype="multipart/form-data">
 

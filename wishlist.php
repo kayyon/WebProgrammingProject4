@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <?php
 session_start();
-if (empty($_SESSION['logged_in'])) {
+if (empty($_SESSION['buyer'])) {
+    session_destroy();
     header('Location: login.php');
     exit;
 } else {
@@ -19,6 +20,9 @@ if (empty($_SESSION['logged_in'])) {
 </head>
 
 <body>
+    <form action="home.php">
+        <input type="submit" name="home" value="Home" />
+    </form>
 
     <?php
     include 'db.php';
@@ -36,7 +40,6 @@ if (empty($_SESSION['logged_in'])) {
         $mainRoads = $_POST['mainRoads'];
         $propertyTax = (7 / 100) * $propertyValue;
         $id = $_POST['id'];
-        echo $id;
         $sql_query = "INSERT INTO wishlist (id, propertyValue, location, age, bedroomNum, bathroomNum, garden, parkingAvailability, nearbyFacilities, mainRoads, propertyTax, image, user_id) 
 		VALUES('$id', '$propertyValue', '$location', '$age', '$bedroomNum', '$bathroomNum', '$garden', '$parkingAvailability', '$nearbyFacilities', '$mainRoads', '$propertyTax', '$image', '" . $_SESSION["user_id"] . "')";
         mysqli_query($mysqli, $sql_query) or die(mysqli_error($mysqli));

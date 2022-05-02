@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <?php
 session_start();
+if (empty($_SESSION['buyer'])) {
+    session_destroy();
+    header("Location: login.php");
+    exit();
+}
 ?>
 <html lang="en">
 

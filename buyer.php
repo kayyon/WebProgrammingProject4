@@ -2,10 +2,10 @@
 <?php
 session_start();
 if (empty($_SESSION['buyer'])) {
+    session_destroy();
     header('Location: login.php');
     exit;
-}
-if ($_SESSION["username"]) {
+} else {
     echo "Welcome " . $_SESSION["username"];
 }
 ?>
@@ -20,6 +20,10 @@ if ($_SESSION["username"]) {
 </head>
 
 <body>
+    <form action="home.php">
+        <input type="submit" name="home" value="Home" />
+    </form>
+
     <?php
     include 'db.php';
 
