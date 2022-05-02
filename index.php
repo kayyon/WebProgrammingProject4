@@ -42,6 +42,11 @@ session_start();
     <div id="propForm">
         <form action="index.php" method="POST">
             <p>
+                <label for="propertyValue">propertyValue:</label>
+                <input type="number" name="propertyValue">
+            </p>
+
+            <p>
                 <label for="location">Location</label>
                 <input type="text" name="location">
             </p>
@@ -77,19 +82,12 @@ session_start();
                 <label for="nearbyFacilities">Nearby Facilities:</label>
                 <input type="hidden" name="nearbyFacilities" value="0">
                 <input type="checkbox" name="nearbyFacilities" value="1">
-
             </p>
 
             <p>
                 <label for="mainRoads">Main Roads:</label>
                 <input type="hidden" name="mainRoads" value="0">
                 <input type="checkbox" name="mainRoads" value="1">
-            </p>
-
-            <p>
-                <label for="sellerBuyer">Check if seller:</label>
-                <input type="hidden" name="sellerBuyer" value="0">
-                <input type="checkbox" name="sellerBuyer" value="1">
             </p>
             <input type="submit" value="Add a property" name="submit" />
         </form>
@@ -103,6 +101,7 @@ session_start();
     include 'db.php';
 
     if (isset($_POST['submit'])) {
+        $propertyValue = $_POST['propertyValue'];
         $location = $_POST['location'];
         $age = $_POST['age'];
         $bedroomNum = $_POST['bedroomNum'];
@@ -111,73 +110,43 @@ session_start();
         $parkingAvailability = $_POST['parkingAvailability'];
         $nearbyFacilities = $_POST['nearbyFacilities'];
         $mainRoads = $_POST['mainRoads'];
-        $sellerBuyer = $_POST['sellerBuyer'];
-
-        $sql_query = "INSERT INTO properties (location, age, bedroomNum, bathroomNum, garden, parkingAvailability, nearbyFacilities, mainRoads, sellerBuyer) 
-	VALUES('$location', '$age', '$bedroomNum', '$bathroomNum', '$garden', '$parkingAvailability', '$nearbyFacilities', '$mainRoads', '$sellerBuyer')";
+        $propertyTax = (7 / 100) * $propertyValue;
+        $sql_query = "INSERT INTO properties (propertyValue, location, age, bedroomNum, bathroomNum, garden, parkingAvailability, nearbyFacilities, mainRoads, propertyTax) 
+	    VALUES('$propertyValue', '$location', '$age', '$bedroomNum', '$bathroomNum', '$garden', '$parkingAvailability', '$nearbyFacilities', '$mainRoads', '$propertyTax')";
 
         mysqli_query($mysqli, $sql_query) or die(mysqli_error($conn));
     }
-
-
     ?>
 
     <?php
-    $sql_query = "SELECT location, age, bedroomNum, bathroomNum, garden, parkingAvailability, nearbyFacilities, mainRoads, sellerBuyer FROM properties";
+    $sql_query = "SELECT propertyValue, location, age, bedroomNum, bathroomNum, garden, parkingAvailability, nearbyFacilities, mainRoads, propertyTax FROM properties";
     $result = $mysqli->query($sql_query);
 
 
+
+    //  Run a loop and display the records on screen dynamically
+    // lets say the above query returned 20 rows
+    // Now display the table on screen with 20 records
     echo "<h3>Properties</h3>";
     if ($result->num_rows > 0) {
-        // output data of each row
-        echo "<table>
-	<tr>
-		<th>location</th>
-		<th>age</th>
-		<th>bedroomNum</th>
-		<th>bathroomNum</th>
-		<th>garden</th>
-		<th>parkingAvailability</th>
-		<th>nearbyFacilities</th>
-		<th>mainRoads</th>
-		<th>sellerBuyer</th>
-	</tr>";
 
-        //  Run a loop and display the records on screen dynamically
-        // lets say the above query returned 20 rows
-        // Now display the table on screen with 20 records
         while ($row = mysqli_fetch_assoc($result)) {
-            echo "<tr>";
-            echo "<td>";
-            echo $row["location"];
-            echo "</td>";
-            echo "<td>";
-            echo $row["age"];
-            echo "</td>";
-            echo "<td>";
-            echo $row["bedroomNum"];
-            echo "</td>";
-            echo "<td>";
-            echo $row["bathroomNum"];
-            echo "</td>";
-            echo "<td>";
-            echo $row["garden"];
-            echo "</td>";
-            echo "<td>";
-            echo $row["parkingAvailability"];
-            echo "</td>";
-            echo "<td>";
-            echo $row["nearbyFacilities"];
-            echo "</td>";
-            echo "<td>";
-            echo $row["mainRoads"];
-            echo "</td>";
-            echo "<td>";
-            echo $row["sellerBuyer"];
-            echo "</td>";
-            echo "</tr>";
+            echo "<div><p>";
+            echo "propertyValue: " . $row["propertyValue"] . "<br/>";
+            echo "location: " . $row["location"] . "<br/>";
+            echo "age: " . $row["age"] . "<br/>";
+            echo "bedroomNum: " . $row["bedroomNum"] . "<br/>";
+            echo "bathroomNum: " . $row["bathroomNum"] . "<br/>";
+            echo "garden: " . $row["garden"] . "<br/>";
+            echo "parkingAvailability: " . $row["parkingAvailability"] . "<br/>";
+            echo "nearbyFacilities: " . $row["nearbyFacilities"] . "<br/>";
+            echo "mainRoads: " . $row["mainRoads"] . "<br/>";
+            echo "propertyTax: " . $row["propertyTax"] . "<br/>";
+            echo "<form action=\"details.php\" method = \"POST\">";
+            echo "<input type=\"hidden\" name=\"id\" value = \"" . $row["id"] . "\">";
+            echo "<input type=\"submit\" value=\"View Property\">";
+            echo "</div></p>";
         }
-        echo "</table>";
     } else {
         echo "0 results";
     }

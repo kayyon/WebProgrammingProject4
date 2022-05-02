@@ -1,8 +1,7 @@
-<!-- destroy session variables -->
+<!DOCTYPE html>
 <?php
 session_start();
 ?>
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -16,32 +15,55 @@ session_start();
     <!-- include db for connection -->
     <?php
     include 'db.php';
-    ?>
 
-    <!-- WORK IN PROGRESS -->
-    <?php
-    if (isset($_SESSION['username'])) {
+    if (isset($_SESSION['register_username'])) {
         echo $_SESSION['register_message'];
     }
 
     if (isset($_POST['submit'])) {
-        $_SESSION['username'] = $_POST['username'];
-        header("Location: index.php");
-        exit();
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        // sql query for password and buyer/seller
+        $sql_retrieve = "SELECT password, buyerSeller FROM user WHERE username='$username';";
+        $sql_query = mysqli_query($mysqli, $sql_retrieve); // array object
+        $retrieved_data = mysqli_fetch_assoc($sql_query); // parses array
+
+        // hash verify
+        $valid = password_verify($password, $retrieved_data["password"]);
+        if ($valid) {
+            // if password needs rehash, it will rehash the password
+            if (password_needs_rehash($retrieved_data["password"], PASSWORD_DEFAULT)) {
+                $retrieved_data["password"] = password_hash($password, PASSWORD_DEFAULT);
+            }
+
+            // checks if user is buyer or seller and redirects user to proper dashboard
+            if ($retrieved_data["buyerSeller"] == 0) {
+                $_SESSION['logged_in'] = "yes";
+                header("Location: buyer.php");
+                exit();
+            } else {
+                $_SESSION['logged_in'] = "yes";
+                header("Location: seller.php");
+                exit();
+            }
+        } else {
+            echo "Error: Account not registered";
+        }
     }
 
     $mysqli->close();
     ?>
 
-    <form action="index.php" method="POST" onsubmit="return validate()">
+    <form action="login.php" method="POST" onsubmit="return validate()">
         <p>
             <label for="username">Username</label>
-            <input type="text" name="username">
+            <input type="text" name="username" required>
         </p>
 
         <p>
             <label for="password">Password</label>
-            <input type="password" name="password">
+            <input type="password" name="password" required>
         </p>
         <input type="submit" name="submit" value="Login" />
     </form>
