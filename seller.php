@@ -24,6 +24,10 @@ if (empty($_SESSION['seller'])) {
         <input type="submit" name="home" value="Home" />
     </form>
 
+    <form action="logout.php">
+        <button type="logout">Logout</button>
+    </form>
+
     <div id="propForm">
         <form action="seller.php" method="POST" enctype="multipart/form-data">
 
@@ -84,7 +88,7 @@ if (empty($_SESSION['seller'])) {
         </form>
     </div>
 
-    <button id="btn">+</button>
+    <button id="btn">Click here to list a property</button>
     <script src="index.js"></script>
 
 

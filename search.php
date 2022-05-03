@@ -16,10 +16,15 @@ if (empty($_SESSION['search'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css" />
     <title>Search Properties</title>
 </head>
 
 <body>
+    <form action="logout.php">
+        <button type="logout">Logout</button>
+    </form>
+
     <div id="propForm">
         <form action="search.php" method="POST" enctype="multipart/form-data">
             <p>
@@ -74,7 +79,7 @@ if (empty($_SESSION['search'])) {
         </form>
     </div>
 
-    <button id="btn">+</button>
+    <button id="btn">Click here to list a property</button>
     <script src="index.js"></script>
 
     <?php
@@ -89,7 +94,6 @@ if (empty($_SESSION['search'])) {
         $parkingAvailability = $_POST['parkingAvailability'];
         $nearbyFacilities = $_POST['nearbyFacilities'];
         $mainRoads = $_POST['mainRoads'];
-        // $user_id = $_SESSION['user_id'];
         $propertyTax = (7 / 100) * $propertyValue;
         $sql_query = "SELECT * FROM properties WHERE propertyValue='$propertyValue' OR location='$location' 
         OR age='$age' OR bedroomNum='$bedroomNum' OR bathroomNum='$bathroomNum' OR garden='$garden' 

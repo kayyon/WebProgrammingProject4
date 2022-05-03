@@ -20,6 +20,7 @@ fieldset {
   border: 1px solid;
   border-radius: 15px;
   width: 20%;
+  margin: auto;
 }
 
 .text {
@@ -29,7 +30,7 @@ fieldset {
 }
 
 .MenuInfo {
-  position: absolute display: inline
+  position: absolute display: inline height:100px;
 }
 
 .Menu-content {
@@ -57,4 +58,28 @@ fieldset {
 
 .MenuInfo:hover .MenuInfo {
   background-color: #3e8e41;
+}
+
+.button {
+  background-color: #1c87c9;
+  border: none;
+  color: white;
+  padding: 20px 34px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+div.form {
+  display: block;
+  text-align: center;
+}
+
+form {
+  margin-left: 25%;
+  margin-right: 25%;
+  width: 50%;
 }

@@ -21,6 +21,11 @@ if (empty($_SESSION['details'])) {
     <form action="home.php">
         <input type="submit" name="home" value="Home" />
     </form>
+
+    <form action="logout.php">
+        <button type="logout">Logout</button>
+    </form>
+
     <?php
     include 'db.php';
 
@@ -106,7 +111,7 @@ if (empty($_SESSION['details'])) {
 
     <form action="delete.php" method="POST">
         <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
-        <input type="submit" <?php if ($result->num_rows == 0) { ?> disabled="disabled" <?php } ?> value="Delete Property Details">
+        <input type="submit" value="Delete Property Details">
     </form>
 
     <button id="btn">Edit Property Details</button>
@@ -114,6 +119,9 @@ if (empty($_SESSION['details'])) {
 
     <?php
     include 'db.php';
+
+    $id = $_POST['id'];
+
     if (isset($_POST['submit'])) {
         $propertyValue = $_POST['propertyValue'];
         $location = $_POST['location'];
@@ -126,18 +134,21 @@ if (empty($_SESSION['details'])) {
         $mainRoads = $_POST['mainRoads'];
         $propertyTax = (7 / 100) * $propertyValue;
 
-        $sql_query = "UPDATE properties SET 
-        propertyValue =" . $propertyValue . ", 
-        location =" . $location . ", 
-        age=" . $age . ", 
-        bedroomNum =" . $bedroomNum . ", 
-        bathroomNum =" . $bathroomNum . ", 
-        garden =" . $garden . ", 
-        parkingAvailability =" . $parkingAvailability . ", 
-        nearbyFacilities =" . $nearbyFacilities . ", 
-        mainRoads=" . $mainRoads . ",
-        propertyTax=" . $propertyTax . "
-        WHERE id=" . $id;
+        echo $id;
+
+        $sql_query = "UPDATE properties SET
+        propertyValue ='$propertyValue', 
+        location ='$location', 
+        age='$age', 
+        bedroomNum ='$bedroomNum', 
+        bathroomNum ='$bathroomNum', 
+        garden ='$garden', 
+        parkingAvailability ='$parkingAvailability', 
+        nearbyFacilities ='$nearbyFacilities', 
+        mainRoads='$mainRoads',
+        propertyTax='$propertyTax'
+        WHERE id='$id'";
+
         mysqli_query($mysqli, $sql_query) or die(mysqli_error($mysqli));
     }
 

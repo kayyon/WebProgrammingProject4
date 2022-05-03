@@ -28,6 +28,11 @@ if (empty($_SESSION['buyer'])) {
         <input type="submit" name="search" value="Search" />
     </form>
 
+    <form action="logout.php">
+        <button type="logout">Logout</button>
+    </form>
+
+
     <?php
     include 'db.php';
 
@@ -39,6 +44,7 @@ if (empty($_SESSION['buyer'])) {
 
         while ($row = mysqli_fetch_assoc($result)) {
             echo "<div><p>";
+            echo "<img src = \"photos/" . $row["image"] . "\"><br/>";
             echo "propertyValue: " . $row["propertyValue"] . "<br/>";
             echo "location: " . $row["location"] . "<br/>";
             echo "age: " . $row["age"] . "<br/>";

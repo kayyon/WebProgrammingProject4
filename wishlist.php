@@ -24,6 +24,10 @@ if (empty($_SESSION['buyer'])) {
         <input type="submit" name="home" value="Home" />
     </form>
 
+    <form action="logout.php">
+        <button type="logout">Logout</button>
+    </form>
+
     <?php
     include 'db.php';
     if (isset($_POST['submit'])) {
